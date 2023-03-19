@@ -3,8 +3,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import CityPage from './CityPage.js'
 
 export default function App() {
+  
   return (
-      <CityPage />
+        <CityPage />
   );
 }
 
