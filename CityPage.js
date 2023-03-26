@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, Image, Platform } from 'react-native';
 import { Card, SearchBar } from 'react-native-elements';
 import CircleSvg from './iconSVG.js';
 import { TabBarController } from './TabBarController.js'
