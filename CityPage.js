@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
-import { Card, SearchBar, Icon, Tab } from 'react-native-elements';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, Image } from 'react-native';
+import { Card, SearchBar } from 'react-native-elements';
 import CircleSvg from './iconSVG.js';
 import { TabBarController } from './TabBarController.js'
+import ListToggle from './listToggle.js';
+import { useFonts } from 'expo-font';
 
 const CityPage = () => {
   const [searchText, setSearchText] = useState('');
-  const [activeTab, setActiveTab] = useState('list'); 
+  const [activeCard, setActiveCard] = useState('list');
 
   const updateSearch = (searchText) => {
     setSearchText(searchText);
   };
 
-  const cityData = [
-    { title: 'List Name', description: 'Tags:'},
+  const [fontsLoaded] = useFonts({
+    'Gogh-ExtraBold': require('./assets/fonts/Gogh-ExtraBold.ttf'),
+    'Sen-ExtraBold': require('./assets/fonts/Gogh-ExtraBoldItalic.ttf'),
+  });
+
+  const cardData = [
+    { title: 'List Name', description: 'Tags:' },
     { title: 'Card Title 2', description: 'Card Description 2' },
     { title: 'Card Title 3', description: 'Card Description 3' },
     { title: 'Card Title 1', description: 'Card Description 1' },
@@ -23,6 +30,15 @@ const CityPage = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+
+      <View style={styles.logoStyleContainer}>
+        <Image source={require('./RexyLogo.png')} style={styles.image} />
+      </View>
+
+      <Text style={styles.cityNameText}>Seattle</Text>
+
+      <ListToggle />
+
       <SearchBar
         placeholder="Search cities..."
         onChangeText={updateSearch}
@@ -35,38 +51,45 @@ const CityPage = () => {
         keyboardShouldPersistTaps="handled"
         style={{ flexGrow: 1 }}
       >
-        {cityData.map((item, index) => (
+        {cardData.map((item, index) => (
           <Card key={index} containerStyle={styles.cardContainer}>
-           <View style={styles.masterContainer}>
-            <View style={styles.contentContainer}>
+            <View style={styles.masterContainer}>
+              <View style={styles.contentContainer}>
                 <Card.Title style={styles.cardTitle}>{item.title}</Card.Title>
                 <View style={styles.iconContainer}>
                   <Text style={styles.description}>Tags:</Text>
                   <View style={styles.imageContainer}>
-                    <CircleSvg radius={10} color="#808080"/>
-                    <CircleSvg radius={10} color="#808080"/>
-                    <CircleSvg radius={10} color="#808080"/>
+                    <CircleSvg radius={10} color="#808080" />
+                    <CircleSvg radius={10} color="#808080" />
+                    <CircleSvg radius={10} color="#808080" />
                   </View>
                 </View>
-            </View>
-            {/* End of left content */}
-            {/* start of right content */}
-            <View style={styles.rightContentContainer}>
+              </View>
+              <View style={styles.rightContentContainer}>
                 <View style={styles.rightTopContent}>
                   <Text style={styles.rightTopText}>420</Text>
-                  <CircleSvg radius={10} color="#808080"/>
+                  <CircleSvg radius={10} color="#808080" />
                 </View>
                 <View style={styles.rightBottomContent}>
                   <Text style={styles.rightTopText}>420</Text>
-                  <CircleSvg radius={10} color="#808080"/>
+                  <CircleSvg radius={10} color="#808080" />
                 </View>
+              </View>
+
             </View>
-            {/* end of right content */}
-           </View>
-         </Card>
+          </Card>
         ))}
       </ScrollView>
-      <TabBarController activeTab={activeTab} setActiveTab={setActiveTab}/>
+      <TabBarController activeTab={activeCard} setActiveTab={setActiveCard} />
+      {/* Code for plus button  */}
+      <View style={styles.plusContainer}>
+        <View style={styles.shadow}>
+          <View style={styles.circle}>
+            <View style={styles.plusHorizontal} />
+            <View style={styles.plusVertical} />
+          </View>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -78,25 +101,24 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
   },
   searchBarContainer: {
+    flexGrow: 1,
     backgroundColor: '#fff',
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
-    borderRadius: 20,
-    marginHorizontal: 5,
-    marginVertical: 5,
+    borderRadius: 14,
+    marginHorizontal: 12,
     borderWidth: 1,
     borderColor: '#000',
-    borderTopWidth: 1,
     borderBottomWidth: 1,
   },
   searchBarInputContainer: {
+    flexGrow: 1,
     backgroundColor: '#fff',
-    borderRadius: 15,
+    borderRadius: 5,
+    marginTop: 0
   },
   scrollViewContent: {
     flexGrow: 1,
-    justifyContent: 'flex-start', // Align child items to the left
-    alignItems: 'stretch', // Allow child elements to expand horizontally
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
   },
   cardContainer: {
     justifyContent: 'space-between',
@@ -106,15 +128,10 @@ const styles = StyleSheet.create({
   },
   cardTitle: {
     textAlign: 'left',
-  },
-  tabBarContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    height: 50,
-    borderTopWidth: 1,
-    borderTopColor: '#bbb',
-    backgroundColor: '#f8f8f8'
+    fontFamily: 'Gogh-ExtraBold',
+    fontSize: 18,
+    color: "black"
+
   },
   contentContainer: {
     marginTop: 10,
@@ -124,12 +141,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexGrow: 0,
     marginRight: 5
-    // Add any description text styles here
   },
   imageContainer: {
     flexDirection: 'row',
     gap: 3
-    // Add any image container styles here
   },
   contentContainer: {
     flexDirection: 'col',
@@ -163,7 +178,82 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flex: 1
+  },
+  listToggleContainer: {
+    flexGrow: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginBottom: 10
+  },
+  listToggleText: {
+    fontSize: 18,
+    textDecorationLine: 'underline',
+    textDecorationColor: 'black',
+    textDecorationStyle: 'solid',
+  },
+  cityNameText: {
+    fontSize: 50,
+    marginLeft: 10,
+    fontFamily: 'Gogh-ExtraBold'
+  },
+  logoStyleContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  plusContainer: {
+    position: 'absolute',
+    bottom: 20,
+    right: 10,
+    zIndex: 1,
+    ...Platform.select({
+      ios: {
+        bottom: 90,
+      },
+    }),
+  },
+  shadow: {
+    backgroundColor: 'black',
+    borderRadius: 50,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  circle: {
+    backgroundColor: 'white',
+    borderRadius: 50,
+    width: 60,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  plusHorizontal: {
+    backgroundColor: "#BD111D",
+    width: 35,
+    height: 4,
+    borderRadius: 2,
+    position: 'absolute',
+    zIndex: 1,
+  },
+  plusVertical: {
+    backgroundColor: "#BD111D",
+    width: 4,
+    height: 35,
+    borderRadius: 2,
+    position: 'absolute',
+    zIndex: 1,
+  },
+  image: {
+    flexGrow: 1,
+    width: 1000,
+    height: 40,
+    resizeMode: 'contain'
   }
+
 });
 
 export default CityPage;
