@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, Image, Platform } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView, Image, Platform, Button, TouchableOpacity } from 'react-native';
 import { Card, SearchBar } from 'react-native-elements';
 import CircleSvg from './iconSVG.js';
 import { TabBarController } from './TabBarController.js'
@@ -28,11 +28,85 @@ const CityPage = () => {
     { title: 'Card Title 3', description: 'Card Description 3' },
   ];
 
+  const CitiesButtons = (props) => {
+    return (
+      <TouchableOpacity onPress={props.onPress}>
+        <View style={{ ...styles.button}}>
+          <Text style={{ ...styles.buttonText}}>
+            {props.cityName}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const handleButtonPress = () => {
+    setButtonColor('#FFA500');
+  }
+
   return (
     <SafeAreaView style={styles.container}>
 
       <View style={styles.logoStyleContainer}>
         <Image source={require('./RexyLogo.png')} style={styles.image} />
+      </View>
+
+      <Text style={{
+        paddingTop: 20,
+        paddingBottom: 10,
+        paddingHorizontal: 20,
+        fontSize: 25
+      }}>Cities</Text>
+      
+      <View style={{ flexDirection: 'row' }}
+        contentContainerStyle={styles.horizScroll}
+      >
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => console.log('pressed')}
+          style={styles.citiesAddButton}
+        >
+          <Text style={{
+            fontSize: 25
+          }}>+</Text>
+        </TouchableOpacity>  
+        <ScrollView
+          showsHorizontalScrollIndicator={false}
+          horizontal={true}
+          flex={ 1 }
+        >
+        <View style={{
+            flexDirection: 'row',
+          }}>
+
+          <CitiesButtons
+            cityName="Seattle" 
+            onPress={() => console.log('button lol')}
+          />
+          <CitiesButtons
+            cityName="Chiraq" 
+            onPress={() => console.log('Seattle button')}       
+          />
+          <CitiesButtons
+            cityName="Los Angeles" 
+            onPress={() => console.log('Seattle button')}       
+          />
+          <CitiesButtons
+            cityName="Des Moines" 
+            onPress={() => console.log('Seattle button')}       
+          />
+          <CitiesButtons
+            cityName="Paris" 
+            onPress={() => console.log('Seattle button')}       
+          />
+          <CitiesButtons
+            cityName="T town" 
+            onPress={() => console.log('Seattle button')}       
+          />
+        </View>
+
+
+        </ScrollView>
       </View>
 
       <Text style={styles.cityNameText}>Seattle</Text>
@@ -252,8 +326,32 @@ const styles = StyleSheet.create({
     width: 1000,
     height: 40,
     resizeMode: 'contain'
+  },
+  horizScroll: {
+    marginVertical: 10,
+    alignItems: 'center',
+    paddingBottom: 10,
+  },
+  button: {
+    backgroundColor: "white",
+    paddingTop: 10,
+    paddingBottom: 2,
+    flex: 1,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    borderColor: 'black',
+    borderWidth: 1,
+    marginHorizontal: 3
+  },
+  citiesAddButton: {
+     paddingBottom: 12,
+     paddingTop: 5,
+     paddingHorizontal: 8
+  },
+  buttonText: {
+    color: "black",
+    fontSize: 20
   }
-
 });
 
 export default CityPage;
