@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        marginBottom: 10
+        marginBottom: 20
     },
     listToggleText: {
         fontSize: 18,
@@ -29,8 +29,6 @@ const ListToggle = () => {
             setActiveTab(tab);
         }
     };
-
-
 
     return (
         <View style={styles.listToggleContainer}>
