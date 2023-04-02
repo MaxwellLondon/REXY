@@ -17,6 +17,7 @@ const CityPage = () => {
   const [fontsLoaded] = useFonts({
     'Gogh-ExtraBold': require('./assets/fonts/Gogh-ExtraBold.ttf'),
     'Sen-ExtraBold': require('./assets/fonts/Gogh-ExtraBoldItalic.ttf'),
+    'Avenir': require('./assets/fonts/AvenirLTStd-Black.otf'),
   });
 
   const cardData = [
@@ -170,7 +171,7 @@ const CityPage = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'flex-end',
     alignItems: 'stretch',
   },
@@ -203,9 +204,8 @@ const styles = StyleSheet.create({
   cardTitle: {
     textAlign: 'left',
     fontFamily: 'Gogh-ExtraBold',
-    fontSize: 18,
+    fontSize: 16,
     color: "black"
-
   },
   contentContainer: {
     marginTop: 10,
@@ -228,16 +228,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'right',
     marginBottom: 5,
-    gap: 7
+    gap: 2
   },
   rightTopText: {
     marginRight: 5,
+    fontFamily: "Avenir",
+    fontWeight: 'Bold'
   },
   rightBottomContent: {
     flexDirection: 'row',
     alignItems: 'right',
     justifyContent: 'flex-end',
-    gap: "7"
+    gap: 2
   },
   rightContentContainer: {
     flexDirection: 'col',
@@ -266,9 +268,10 @@ const styles = StyleSheet.create({
     textDecorationStyle: 'solid',
   },
   cityNameText: {
-    fontSize: 50,
+    fontSize: 55,
     marginLeft: 10,
-    fontFamily: 'Gogh-ExtraBold'
+    fontFamily: 'Gogh-ExtraBold',
+
   },
   logoStyleContainer: {
     justifyContent: 'center',
