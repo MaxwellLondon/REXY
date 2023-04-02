@@ -34,8 +34,8 @@ const CityPage = ({ navigation }) => {
   const CitiesButtons = (props) => {
     return (
       <TouchableOpacity onPress={props.onPress}>
-        <View style={{ ...styles.button}}>
-          <Text style={{ ...styles.buttonText}}>
+        <View style={{ ...styles.button }}>
+          <Text style={{ ...styles.buttonText }}>
             {props.cityName}
           </Text>
         </View>
@@ -60,7 +60,7 @@ const CityPage = ({ navigation }) => {
         paddingHorizontal: 20,
         fontSize: 25
       }}>Cities</Text>
-      
+
       <View style={{ flexDirection: 'row' }}
         contentContainerStyle={styles.horizScroll}
       >
@@ -72,13 +72,13 @@ const CityPage = ({ navigation }) => {
           <Text style={{
             fontSize: 25
           }}>+</Text>
-        </TouchableOpacity>  
+        </TouchableOpacity>
         <ScrollView
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          flex={ 1 }
+          flex={1}
         >
-        <View style={{
+          <View style={{
             flexDirection: 'row',
           }}>
 
@@ -349,9 +349,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 3
   },
   citiesAddButton: {
-     paddingBottom: 12,
-     paddingTop: 5,
-     paddingHorizontal: 8
+    paddingBottom: 12,
+    paddingTop: 5,
+    paddingHorizontal: 8
   },
   buttonText: {
     color: "black",
