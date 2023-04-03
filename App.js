@@ -1,14 +1,15 @@
 import CityPage from './CityPage.js'
-import { LoginPage } from './LoginPage.js'
+import { SignUpPage } from './SignUpPage.js'
 import ListPage from './ListPage.js'
+import { LogInPage } from './LogInPage'
 
 export default function App() {
 
   return (
     // <CityPage />
-    <LoginPage />
+    // <SignUpPage />
     // <ListPage />
-    // <CityPage />
+    <LogInPage />
   );
 }
 

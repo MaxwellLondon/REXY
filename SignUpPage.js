@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, SafeAreaView } from 'react-native';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase.js';
+import { FontDisplay } from 'expo-font';
 
-const LogInPage = () => {
+const SignUpPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage);
-            });
+    const handleSignUp = async () => {
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            console.log('User signed up successfully');
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const validateEmail = (email) => {
@@ -33,12 +29,9 @@ const LogInPage = () => {
         return passwordRegex.test(password);
     };
 
-    const handleLoginButtonPress = () => {
-        console.log(validateEmail(email))
-        console.log(validatePassword(password))
-
+    const handleSignUpButtonPress = () => {
         if (validateEmail(email) && validatePassword(password)) {
-            handleLogin();
+            handleSignUp();
         } else {
             alert('Please enter a valid email and password.');
         }
@@ -51,7 +44,7 @@ const LogInPage = () => {
                     <Image source={require('./RexyLogo.png')} style={styles.image} />
                 </View>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Log In</Text>
+                    <Text style={styles.title}>Sign Up</Text>
                 </View>
                 <View style={styles.logInContainer}>
                     <TextInput
@@ -70,8 +63,8 @@ const LogInPage = () => {
                         secureTextEntry
                         autoCapitalize="none"
                     />
-                    <TouchableOpacity style={styles.button} onPress={handleLoginButtonPress}>
-                        <Text style={styles.buttonText}>Log In</Text>
+                    <TouchableOpacity style={styles.button} onPress={handleSignUpButtonPress}>
+                        <Text style={styles.buttonText}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -143,4 +136,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export { LogInPage };
+export { SignUpPage };
