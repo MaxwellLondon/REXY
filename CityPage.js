@@ -5,8 +5,10 @@ import CircleSvg from './iconSVG.js';
 import { TabBarController } from './TabBarController.js'
 import ListToggle from './listToggle.js';
 import { useFonts } from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const CityPage = () => {
+const CityPage = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [activeCard, setActiveCard] = useState('list');
 
@@ -80,31 +82,31 @@ const CityPage = () => {
             flexDirection: 'row',
           }}>
 
-            <CitiesButtons
-              cityName="Seattle"
-              onPress={() => console.log('button lol')}
-            />
-            <CitiesButtons
-              cityName="Chiraq"
-              onPress={() => console.log('Seattle button')}
-            />
-            <CitiesButtons
-              cityName="Los Angeles"
-              onPress={() => console.log('Seattle button')}
-            />
-            <CitiesButtons
-              cityName="Des Moines"
-              onPress={() => console.log('Seattle button')}
-            />
-            <CitiesButtons
-              cityName="Paris"
-              onPress={() => console.log('Seattle button')}
-            />
-            <CitiesButtons
-              cityName="T town"
-              onPress={() => console.log('Seattle button')}
-            />
-          </View>
+          <CitiesButtons
+            cityName="Seattle" 
+            onPress={() => navigation.push('SeattlePage')}
+          />
+          <CitiesButtons
+            cityName="Chiraq" 
+            onPress={() => navigation.push('SeattlePage')}       
+          />
+          <CitiesButtons
+            cityName="Los Angeles" 
+            onPress={() => navigation.push('SeattlePage')}       
+          />
+          <CitiesButtons
+            cityName="Des Moines" 
+            onPress={() => navigation.push('SeattlePage')}       
+          />
+          <CitiesButtons
+            cityName="Paris" 
+            onPress={() => navigation.push('SeattlePage')}       
+          />
+          <CitiesButtons
+            cityName="T town" 
+            onPress={() => navigation.push('SeattlePage')}       
+          />
+        </View>
 
 
         </ScrollView>
