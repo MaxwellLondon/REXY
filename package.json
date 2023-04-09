@@ -27,7 +27,8 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "^13.8.0",
     "react-native-web": "~0.18.10",
-    "stack": "^0.1.0"
+    "stack": "^0.1.0",
+    "yelp-fusion": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
