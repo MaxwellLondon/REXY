@@ -7,14 +7,21 @@ import ListToggle from './listToggle.js';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Modal from 'react-native-modal';
+import AddCityModal from './AddCityModal.js';
 
 const CityPage = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
   const [activeCard, setActiveCard] = useState('list');
+  const [isAddCityVisible, setAddCityVisible] = useState(true);
 
   const updateSearch = (searchText) => {
     setSearchText(searchText);
   };
+
+  const toggleModal = () => {
+    setAddCityVisible(!isAddCityVisible);
+  }
 
   const [fontsLoaded] = useFonts({
     'Gogh-ExtraBold': require('./assets/fonts/Gogh-ExtraBold.ttf'),
@@ -30,6 +37,8 @@ const CityPage = ({ navigation }) => {
     { title: 'Card Title 2', description: 'Card Description 2' },
     { title: 'Card Title 3', description: 'Card Description 3' },
   ];
+
+  const cities = ["Seattle", "Chiraq", "Los Angeles", "Des Moines", "Paris", "T town "]
 
   const CitiesButtons = (props) => {
     return (
@@ -82,37 +91,22 @@ const CityPage = ({ navigation }) => {
             flexDirection: 'row',
           }}>
 
-          <CitiesButtons
-            cityName="Seattle" 
-            onPress={() => navigation.push('SeattlePage')}
-          />
-          <CitiesButtons
-            cityName="Chiraq" 
-            onPress={() => navigation.push('SeattlePage')}       
-          />
-          <CitiesButtons
-            cityName="Los Angeles" 
-            onPress={() => navigation.push('SeattlePage')}       
-          />
-          <CitiesButtons
-            cityName="Des Moines" 
-            onPress={() => navigation.push('SeattlePage')}       
-          />
-          <CitiesButtons
-            cityName="Paris" 
-            onPress={() => navigation.push('SeattlePage')}       
-          />
-          <CitiesButtons
-            cityName="T town" 
-            onPress={() => navigation.push('SeattlePage')}       
-          />
-        </View>
-
-
+            {
+              cities.map((cityName) => {
+                return (
+                  <CitiesButtons
+                    cityName={cityName}
+                    onPress={() => navigation.push('SeattlePage')}
+                    key={cityName}
+                  />
+                )
+              })
+            }
+          </View>
         </ScrollView>
       </View>
 
-      <Text style={styles.cityNameText}>Seattle</Text>
+      <Text style={styles.cityNameText}>Deez Nuts</Text>
 
       <ListToggle />
 
@@ -159,14 +153,18 @@ const CityPage = ({ navigation }) => {
       </ScrollView>
       <TabBarController activeTab={activeCard} setActiveTab={setActiveCard} />
       {/* Code for plus button  */}
-      <View style={styles.plusContainer}>
-        <View style={styles.shadow}>
-          <View style={styles.circle}>
+      <TouchableOpacity style={styles.plusContainer} onPress={() => console.log('The container was pressed!')}>
+        <TouchableOpacity style={styles.shadow} onPress={() => console.log('The shadow was pressed!')}>
+          <TouchableOpacity style={styles.circle} onPress={toggleModal}>
             <View style={styles.plusHorizontal} />
             <View style={styles.plusVertical} />
-          </View>
-        </View>
-      </View>
+          </TouchableOpacity>
+        </TouchableOpacity>
+      </TouchableOpacity>
+
+
+      <AddCityModal isVisible={isAddCityVisible} onBackdropPress={toggleModal} toggleModal={toggleModal} />
+
     </SafeAreaView>
   );
 };
