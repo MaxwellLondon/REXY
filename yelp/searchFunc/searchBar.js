@@ -26,6 +26,7 @@ function SearchBar() {
 
     
     const results = await getYelpResults(searchTerm);
+    
     setSelectedPlace(results[0]) // assuming position 0 is selected
   };
 
