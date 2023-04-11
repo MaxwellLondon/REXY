@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
     logInContainer: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#fff',
         justifyContent: '',
         marginTop: 100
     },
